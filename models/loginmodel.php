@@ -9,13 +9,13 @@ class LoginModel extends Model
         $usuario = $params['usuario'];
         $password = sha1(md5($params['password']));
         
-        $query = $this->db->connect()->prepare("select * 
-            from usuario.usuarios u 
-            where u.usuario_nick = :usuario 
-                and u.usuario_pass = :password");
+        $query = $this->db->connect()->prepare("SELECT *
+                                                FROM seguridad.usuario a
+                                                WHERE a.usuario_nick = :usuario
+                                                AND a.usuario_contrasenna = :contrasenna");
         try {
             $query->execute(['usuario' => $usuario 
-                , 'password' => $password]);
+                , 'contrasenna' => $password]);
             
             if ($query->rowCount() > 0) {
                 return true;

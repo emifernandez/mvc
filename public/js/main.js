@@ -30,3 +30,32 @@ function httpRequest(url, callback){
         }
     }
 }
+
+function mostrarMensaje(mensaje, tipo_mensaje){
+    if(mensaje) { 
+        toastr.options = {
+                            "closeButton": true,
+                            "positionClass": 'toast-top-full-width',
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+            }
+        switch(tipo_mensaje) {
+        case 'success':
+            toastr.success(mensaje);
+            break;
+        case 'error':
+            toastr.error(mensaje);
+            break;
+        default:
+            toastr.info(mensaje);
+        }
+    }
+}

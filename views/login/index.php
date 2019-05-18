@@ -13,8 +13,12 @@ error_reporting(0);
 
 	<!--Custom styles-->
 	<link rel="stylesheet" type="text/css" href="<?php echo constant('URL') ?>public/css/login.css">
+	<link rel="stylesheet" href="<?php echo constant('URL') ?>public/toastr/build/toastr.min.css">
+    <script src="<?php echo constant('URL') ?>public/bootstrap/js/jquery-3.4.0.min.js"></script>
+    <script src="<?php echo constant('URL') ?>public/toastr/build/toastr.min.js"></script>
+    <script src="<?php echo constant('URL') ?>public/js/main.js"></script>
 </head>
-<body>
+<body onload="mostrarMensaje('<?php echo $this->mensaje; ?>', '<?php echo $this->tipo_mensaje; ?>')">
 <div class="container">
 	<div class="d-flex justify-content-center h-100">
 		<div class="card">
@@ -22,7 +26,6 @@ error_reporting(0);
 				<h3>Iniciar Sesión</h3>
 			</div>
 			<div class="card-body">
-				<div align="center" style="color:pink"><?php echo $this->mensaje; ?></div>
 				<form method="POST" action="<?php echo constant('URL') ?>login/ingresar">
 					<div class="input-group form-group">
 						<div class="input-group-prepend">

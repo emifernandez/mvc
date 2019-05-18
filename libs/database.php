@@ -22,7 +22,7 @@ class Database
             $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             return $pdo;
         } catch (PDOException $e) {
-            print_r('Error connection: ' . $e.getMessage());
+            print_r('Error connection: ' . $e->getMessage());
         }
     }
 }
