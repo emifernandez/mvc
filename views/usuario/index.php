@@ -59,7 +59,13 @@
                         <input type="text" name="telefono" id="telefono" class="form-control col-sm-3" placeholder="Introduzca teléfono">
                         <label for="estado" class="col-sm-1 col-form-label">Estado: </label>
                         <select class="form-control col-sm-2" name="estado" id="estado">
-                            <option value="1">Activo</option>
+                            <?php 
+                                foreach ($this->datos_estado as $estado) {
+                            ?>
+                                <option value="<?php echo $estado->estado_id ?>"><?php echo ucfirst($estado->estado_descripcion) ?></option>
+                            <?php
+                                } 
+                            ?>
                         </select>
                     </div>
                     <div class="form-group">

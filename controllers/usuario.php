@@ -1,5 +1,6 @@
 <?php
 error_reporting(0);
+require_once 'models/estadomodel.php';
 class Usuario extends Controller
 {
     function __construct() {
@@ -8,6 +9,9 @@ class Usuario extends Controller
     }
 
     function render() {
+        $estado_model = new EstadoModel();
+        $estados = $estado_model->get();
+        $this->view->datos_estado = $estados;
         $this->view->render('usuario/index');
     }
 
