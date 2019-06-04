@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="<?php echo constant('URL') ?>public/bootstrap/css/toastr.min.css">
     <link rel="stylesheet" href="<?php echo constant('URL') ?>public/datatables/datatables.min.css">
     <script src="<?php echo constant('URL') ?>public/bootstrap/js/jquery-3.4.0.min.js"></script>
+    <script src="<?php echo constant('URL') ?>public/bootstrap/js/bootstrap.min.js"></script>
     <script src="<?php echo constant('URL') ?>public/datatables/datatables.min.js"></script>
     <script src="<?php echo constant('URL') ?>public/bootstrap/js/toastr.min.js"></script>
 
@@ -20,6 +21,17 @@
         $(document).ready(function() {
             $('#datos').DataTable();
         } );
+    </script>
+
+    <script>
+        $('#modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var id = button.data('id');
+            console.log('holi' + id);
+            var modal = $(this);
+            modal.find('.modal-title').text('Eliminar ' + id);
+            //modal.find('.modal-body input').val(id)
+        })
     </script>
 
     <title>Roles</title>
@@ -50,12 +62,33 @@
                                 <td><?php echo ucfirst($rol['rol_descripcion']); ?></td>
                                 <td><?php echo ucfirst($rol['estado_descripcion']); ?></td>
                                 <td>
-                                    <a href="<?php echo constant('URL') ?>rol/editar/<?php echo $rol['rol_id']; ?>"><i class="fa fa-edit"></i>Editar</a> | 
-                                    <a class="text-danger" href="<?php echo constant('URL') ?>rol/eliminar/<?php echo $rol['rol_id']; ?>"><i class="fas fa-trash"></i>Eliminar</a> </td>
+                                    <a class="btn btn-info btn-sm col-sm-3" href="<?php echo constant('URL') ?>rol/editar/<?php echo $rol['rol_id']; ?>"><i class="fa fa-edit"></i>Editar</a> 
+                                    <a class="btn btn-danger btn-sm col-sm-3 text-light" data-toggle="modal" data-target="#modal" data-id="<?php echo $rol['rol_id']; ?>"><i class="fas fa-trash"></i>Eliminar</a> </td>
+
                             </tr>
                                 <?php } ?>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+          <!-- Modal -->
+        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title" id="modalLabel">Eliminar Registro</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ¿Esta seguro que desea eliminar el registro?
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-danger" href="<?php echo constant('URL') ?>rol/eliminar/<?php echo $rol['rol_id']; ?>">Eliminar</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
                 </div>
             </div>
         </div>

@@ -14,7 +14,7 @@ class Login extends Controller
 
     function ingresar () {
         $usuario = $_POST['usuario'];
-        $password = $_POST['password'];
+        $password = sha1(md5($_POST['password']));
         $mensaje = "";
 
         if(!empty($usuario) && !empty($password)) {

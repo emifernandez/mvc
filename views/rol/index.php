@@ -16,7 +16,7 @@
     <title>Roles</title>
     
 </head>
-<body onload="mostrarMensaje('<?php echo $this->mensaje; ?>', '<?php echo $this->tipo_mensaje; ?>')">
+<body onload="mostrarMensaje('<?php echo $this->mensaje; ?>' , '<?php echo $this->tipo_mensaje; ?>')">
     <div class="container">
         <div class="card">
             <div class="card-header">
