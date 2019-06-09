@@ -24,19 +24,20 @@
     </script>
 
     <script>
-        $('#modal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget); // Button that triggered the modal
-            var id = button.data('id');
-            console.log('holi' + id);
-            var modal = $(this);
-            modal.find('.modal-title').text('Eliminar ' + id);
-            //modal.find('.modal-body input').val(id)
+        $(document).ready(function (){
+            $('#modal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('id');
+                var link = $('#eliminar_modal').attr('href') + id;
+                $("#eliminar_modal").prop("href", link);
+            })
         })
     </script>
 
     <title>Roles</title>
 </head>
 <body onload="mostrarMensaje('<?php echo $this->mensaje; ?>', '<?php echo $this->tipo_mensaje; ?>')">
+    <?php require 'views/header.php'; ?>
     <div class="container">
         <div class="card">
             <div class="card-header">
@@ -86,7 +87,7 @@
                     ¿Esta seguro que desea eliminar el registro?
                 </div>
                 <div class="modal-footer">
-                    <a class="btn btn-danger" href="<?php echo constant('URL') ?>rol/eliminar/<?php echo $rol['rol_id']; ?>">Eliminar</a>
+                    <a id="eliminar_modal" class="btn btn-danger text-white" href="<?php echo constant('URL') ?>rol/eliminar/">Eliminar</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 </div>
                 </div>

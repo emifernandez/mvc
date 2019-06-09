@@ -10,16 +10,19 @@ class RolModel extends Model
             $query = $this->db->connect()->prepare("INSERT INTO 
                                                         seguridad.rol
                                                     (
+                                                        rol_id,
                                                         rol_descripcion,
                                                         estado_id
                                                     )
                                                     VALUES (
+                                                        :rol_id,
                                                         :rol_descripcion,
                                                         :estado_id
                                                     );");
             $query->execute([
-                'rol_descripcion' => $params['rol_descripcion']
-                , 'estado_id'     => $params['estado']
+                'rol_id'            => $params['rol_id']
+                ,'rol_descripcion'  => $params['rol_descripcion']
+                , 'estado_id'       => $params['estado']
 
             ]);
             return true;
@@ -42,6 +45,23 @@ class RolModel extends Model
                 'rol_id'            => $params['rol_id']
                 , 'rol_descripcion' => $params['rol_descripcion']
                 , 'estado_id'       => $params['estado']
+
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+    public function delete($params) {
+        try {
+            $query = $this->db->connect()->prepare("DELETE FROM
+                                                        seguridad.rol 
+                                                    WHERE 
+                                                        rol_id = :rol_id;");
+            $query->execute([
+                'rol_id' => $params['rol_id']
 
             ]);
             return true;
@@ -84,6 +104,17 @@ class RolModel extends Model
             return $item;
         } catch (PDOException $e) {
             return [];
+        }
+    }
+
+    public function getNextId() {
+        try {
+            $query = $this->db->connect()->query("SELECT coalesce(max(rol_id) + 1, 1)
+                                                FROM seguridad.rol;");
+            $item = $query->fetchColumn();
+            return $item;
+        } catch (PDOException $e) {
+            return null;
         }
     }
 }

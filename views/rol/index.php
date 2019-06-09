@@ -17,15 +17,22 @@
     
 </head>
 <body onload="mostrarMensaje('<?php echo $this->mensaje; ?>' , '<?php echo $this->tipo_mensaje; ?>')">
+    <?php require 'views/header.php'; ?>
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <i class="fas fa-plus-circle"></i> <strong> Agregar Nuevo Rol</strong> <a href="<?php echo constant('URL') ?>rol/listar" class="float-right btn btn-dark btn-sm"><i class="fa fa-fw fa-globe"></i> Buscar Roles</a>
+                <i class="fas fa-plus-circle"></i> <strong> <?php echo $this->op == 3 ? 'Editar Rol' : 'Agregar Nuevo Rol' ?></strong> <a href="<?php echo constant('URL') ?>rol/listar" class="float-right btn btn-dark btn-sm"><i class="fa fa-fw fa-globe"></i> Buscar Roles</a>
             </div>
             <div class="card-body">
                 <h5 class="card-title">Los campos con <span class="text-danger">*</span> son obligatorios</h5>
             
                 <form action="<?php echo $this->op == 3 ?  constant('URL').'rol/editar/'.$this->rol['rol_id'] : constant('URL').'rol/agregar'; ?>" method="post">
+                    <div class="form-group row">
+                        <label for="rol_id" class="col-sm-2 col-form-label">Código: <span class="text-danger">*</span></label>
+                        <input type="text" name="rol_id" id="rol_id" class="form-control col-sm-6" placeholder="0"
+                        value="<?php echo $this->op == 3 ? $this->rol['rol_id'] : $this->id; ?>" required readonly>
+                    </div>
+                    
                     <div class="form-group row">
                         <label for="rol_descripcion" class="col-sm-2 col-form-label">Descripción: <span class="text-danger">*</span></label>
                         <input type="text" name="rol_descripcion" id="rol_descripcion" class="form-control col-sm-6" placeholder="Introduzca descripción"
@@ -48,8 +55,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <button name="submit" id="submit" value="submit" class="btn btn-primary"><i class="fa fa-fw fa-plus-circle"></i>
-                            <?php echo $this->op == 3 ? 'Editar Rol' : 'Agregar Rol' ?></button>
+                        <button name="submit" id="submit" value="submit" class="btn btn-primary col-sm-2"><i class="fa fa-fw fa-check"></i>
+                            Grabar</button>
                     </div>
                 </form>
             </div>

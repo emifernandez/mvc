@@ -13,10 +13,11 @@
     <script src="<?php echo constant('URL') ?>public/bootstrap/js/toastr.min.js"></script>
     <script src="<?php echo constant('URL') ?>public/js/main.js"></script>
 
-    <title>Usuario</title>
+    <title>Usuarios</title>
     
 </head>
 <body onload="mostrarMensaje('<?php echo $this->mensaje; ?>', '<?php echo $this->tipo_mensaje; ?>')">
+    <?php require 'views/header.php'; ?>
     <div class="container">
         <div class="card">
             <div class="card-header">
@@ -26,6 +27,11 @@
                 <h5 class="card-title">Los campos con <span class="text-danger">*</span> son obligatorios</h5>
             
                 <form action="<?php echo constant('URL') ?>usuario/agregar" method="post">
+                    <div class="form-group row">
+                        <label for="usuario_id" class="col-sm-2 col-form-label">Código: <span class="text-danger">*</span></label>
+                        <input type="text" name="usuario_id" id="usuario_id" class="form-control col-sm-3" placeholder="0" 
+                        value="<?php echo $this->op == 3 ? $this->usuario['usuario_ids'] : $this->id; ?>" required readonly>
+                    </div>
                     <div class="form-group row">
                         <label for="usuario" class="col-sm-2 col-form-label">Usuario: <span class="text-danger">*</span></label>
                         <input type="text" name="usuario" id="usuario" class="form-control col-sm-3" placeholder="Introduzca usuario" required>
@@ -43,8 +49,8 @@
                         <input type="text" name="nombre" id="nombre" class="form-control col-sm-6" placeholder="Introduzca nombres" required>
                     </div>
                     <div class="form-group row">
-                        <label for="apellido" class="col-sm-2 col-form-label">Apellidos: </label>
-                        <input type="text" name="apellido" id="apellido" class="form-control col-sm-6" placeholder="Introduzca apellidos">
+                        <label for="apellido" class="col-sm-2 col-form-label">Apellidos: <span class="text-danger">*</span></label>
+                        <input type="text" name="apellido" id="apellido" class="form-control col-sm-6" placeholder="Introduzca apellidos" required>
                     </div>
                     <div class="form-group row">
                         <label for="direccion" class="col-sm-2 col-form-label">Dirección: </label>

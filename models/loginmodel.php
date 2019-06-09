@@ -7,16 +7,15 @@ class LoginModel extends Model
 
     public function ingresar($params) {
         $usuario = $params['usuario'];
-        $password = sha1(md5($params['password']));
+        $contrasenna = $params['password'];
         
         $query = $this->db->connect()->prepare("SELECT *
                                                 FROM seguridad.usuario a
-                                                WHERE a.usuario_nick = :usuario
-                                                AND a.usuario_contrasenna = :contrasenna");
+                                                WHERE a.usuario_usuario = :usuario
+                                                AND a.usuario_password = :contrasenna");
         try {
-            $query->execute(['usuario' => $usuario 
-                , 'contrasenna' => $password]);
-            
+            $query->execute(['usuario'  => $usuario 
+                        , 'contrasenna' => $contrasenna]);
             if ($query->rowCount() > 0) {
                 return true;
             } else {
@@ -25,7 +24,7 @@ class LoginModel extends Model
         } catch (PDOException $e) {
             return false;
         }
-    }  
+    }
 }
 
 ?>
